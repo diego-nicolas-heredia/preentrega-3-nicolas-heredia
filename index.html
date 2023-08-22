@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="./assets/img/naikos-icono2.png" type="image/x-icon">
+  <meta name="description" content="En nuestro sitio web encontraras la mejor vestimenta a la moda">
+  <meta name="keywords" content="ropa, hombre, mujer, ,camisa,pantalon, remera, buzo">
+  <link rel="stylesheet" href="./css/styles.css">
+  <title>NAIKO'S - Tu lugar para vestirte -</title>
+</head>
+
+<body>
+  <header class="header">
+    <div class="contenedor__header__logo__titulo">
+      <img src="./assets/img/naikos-icono2.png" alt="logo naiko's" class="header__logo">
+      <p class="header__titulo">Naiko's</p>
+    </div>
+
+    <div class="contenedor__header__icono__carrito">
+      <p id="iconoCarrito" class="header__icono__carrito">🛒</p>
+      <span id="carritoContador" class="header__contenedor__contador"></span>
+    </div>
+
+    <div id="modalContainer" class="modal__container"></div>
+  </header>
+
+  <main class="main">
+    <section class="main__contenedor__section">
+      <div class="main__contenedor__filtros">
+        <ul id="filtrosContainer" class="main__contenedor__ul">
+          <li id="todos" name="filto-producto" class="main__contenedor__li">Todos</li>
+          <li id="abrigos" name="filto-producto" class="main__contenedor__li">Abrigos</li>
+          <li id="camisas" name="filto-producto" class="main__contenedor__li">Camisas</li>
+          <li id="pantalones" name="filto-producto" class="main__contenedor__li">Pantalones</li>
+        </ul>
+      </div>
+
+      <div id="tiendaProductos" class="main__contenedor__tienda__productos"></div>
+    </section>
+
+    <footer></footer>
+  </main>
+  <script src="./js/productos.js"></script>
+  <script src="./js/main.js"></script>
+  <script src="./js/carrito.js"></script>
+</body>
+
+</html>

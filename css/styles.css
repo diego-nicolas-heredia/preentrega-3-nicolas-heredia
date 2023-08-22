@@ -1,0 +1,249 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap");
+
+:root {
+  --bg-color-main: #071e21;
+  --bg-color-productos: #a6b1aa;
+  --bg-color-modal-productos: #e8eeea;
+  --button-color-oscuro: #8aa894;
+  --button-color-oscuro2: #27a8b9;
+  --header-color-oscuro: #718979;
+  --button-color-claro: #b9cbbe;
+  --font-color: #f3f6f4;
+}
+
+body {
+  font-family: "Roboto Mono", monospace;
+  background: var(--bg-color-main);
+  color: var(--font-color);
+}
+
+/**HEADER*/
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--header-color-oscuro);
+  padding: 1rem;
+  border-radius: 0px 0px 10px 10px;
+}
+
+.contenedor__header__logo__titulo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header__logo {
+  width: 20%;
+}
+
+.header__titulo {
+  font-size: 2rem;
+}
+
+.header__icono__carrito {
+  font-size: 2rem;
+}
+
+.modal__container {
+  display: none;
+}
+
+.header__contenedor__contador {
+  position: absolute;
+  right: 15%;
+  top: 5%;
+  font-size: 1rem;
+}
+
+/** MAIN */
+
+.main__contenedor__section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.main__contenedor__filtros {
+  background: var(--button-color-oscuro);
+  border-radius: 5px 5px 5px 5px;
+  position: sticky;
+  top: 3%;
+}
+
+.main__contenedor__ul {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  list-style: none;
+  padding: 2rem;
+}
+
+.main__contenedor__tienda__productos {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1rem;
+  background: var(--bg-color-productos);
+  border-radius: 5px 5px 5px 5px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--header-color-oscuro);
+  padding: 1rem;
+  gap: 0.5rem;
+  text-align: center;
+  border-radius: 10px 10px 10px 10px;
+}
+
+.card__img {
+  border-radius: 20px 20px 20px 20px;
+}
+
+.card__titulo {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.card__precio {
+  font-size: 1.2rem;
+}
+
+.card__btn__comprar {
+  border: none;
+  outline: none;
+  background: var(--button-color-claro);
+  border-radius: 20px 20px 20px 20px;
+  padding: 0.5rem 1rem;
+}
+
+/**MODAL CARRITO*/
+
+.modal__container__products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-height: 60vh;
+  background: #fff;
+  color: #000;
+  gap: 1rem;
+  border-radius: 10px;
+  padding: 1rem 0;
+  position: fixed;
+  overflow: auto;
+  z-index: 10;
+  top: 12%;
+  right: 0;
+  scrollbar-color: none;
+}
+
+.modal__header {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  padding: 1rem;
+  border: 5px solid var(--button-color-oscuro);
+  border-radius: 20px 20px 20px 20px;
+}
+
+.modal__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal__content > img {
+  width: 50%;
+}
+
+@media (min-width: 1200px) {
+  .main__contenedor__section {
+    flex-direction: row;
+    gap: 2rem;
+    margin-top: 3rem;
+    margin-right: 2rem;
+  }
+
+  .main__contenedor__tienda__productos {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .main__contenedor__ul {
+    flex-direction: column;
+    justify-content: left;
+    font-size: 2rem;
+    padding: 2rem 0;
+    padding-right: 2rem;
+  }
+
+  .main__contenedor__li {
+    cursor: pointer;
+    transition: all 400ms ease-in-out;
+  }
+
+  .main__contenedor__li:hover {
+    background: #e8eeea;
+    padding: 0.2rem;
+    color: #000;
+    border-radius: 0px 5px 5px 0px;
+  }
+
+  .main__contenedor__filtros {
+    border-radius: 0px 5px 5px 0px;
+    height: 50%;
+    position: sticky;
+    top: 5%;
+  }
+
+  .card__img {
+    width: 300px;
+    height: 495px;
+  }
+
+  .card__btn__comprar {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+  }
+
+  .card__btn__comprar:hover {
+    background: var(--button-color-oscuro);
+    cursor: pointer;
+    transition: all 400ms ease-in-out;
+    color: var(--font-color);
+  }
+
+  .header__logo {
+    width: 10%;
+  }
+
+  .header__titulo {
+    font-size: 3rem;
+  }
+
+  .header__icono__carrito {
+    font-size: 4rem;
+    cursor: pointer;
+  }
+
+  .header__contenedor__contador {
+    position: absolute;
+    right: 3.5%;
+    top: 2%;
+    font-size: 2rem;
+  }
+}
