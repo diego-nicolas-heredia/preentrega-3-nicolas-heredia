@@ -13,6 +13,8 @@
   --button-color-oscuro2: #27a8b9;
   --header-color-oscuro: #718979;
   --button-color-claro: #b9cbbe;
+  --button-pagar-oscuro: #30a451;
+  --button-pagar-claro: #00ff48;
   --font-color: #f3f6f4;
 }
 
@@ -130,12 +132,11 @@ body {
 
 .modal__container__products {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   width: 100%;
   max-height: 60vh;
-  background: #fff;
+  background: #ffffffb9;
   color: #000;
   gap: 1rem;
   border-radius: 10px;
@@ -144,10 +145,18 @@ body {
   overflow: auto;
   z-index: 10;
   top: 12%;
-  right: 0;
+  right: 0%;
   scrollbar-color: none;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+.sumar,
+.restar,
+.delete__product {
+  cursor: pointer;
+}
 .modal__header {
   display: flex;
   align-items: center;
@@ -155,6 +164,11 @@ body {
   padding: 1rem;
   border: 5px solid var(--button-color-oscuro);
   border-radius: 20px 20px 20px 20px;
+  background: #e8eeea;
+}
+
+.modal__header__btn {
+  cursor: pointer;
 }
 
 .modal__content {
@@ -162,10 +176,46 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background: #fff;
+  border-radius: 10px;
+  padding: 1rem;
+  width: 20rem;
 }
 
 .modal__content > img {
   width: 50%;
+}
+
+.btn__vaciar__carrito {
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  background-color: var(--button-color-oscuro);
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.btn__vaciar__carrito:hover {
+  background-color: var(--button-color-claro);
+  color: var(--bg-color-main);
+  border: 1px solid var(--bg-color-main);
+}
+
+.btn__pagar__carrito {
+  background-color: var(--button-pagar-oscuro);
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  padding: 5px 10px;
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.btn__pagar__carrito:hover {
+  background-color: var(--button-pagar-claro);
+  border: 1px solid var(--button-pagar-oscuro);
+  color: #000;
 }
 
 @media (min-width: 1200px) {
@@ -245,5 +295,10 @@ body {
     right: 3.5%;
     top: 2%;
     font-size: 2rem;
+  }
+
+  .modal__container__products {
+    width: 50%;
+    right: 25%;
   }
 }

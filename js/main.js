@@ -1,16 +1,37 @@
 const iconoCarrito = document.getElementById("iconoCarrito");
 const modalContainer = document.getElementById("modalContainer");
 const tiendaProductos = document.getElementById("tiendaProductos");
+let productos = [];
+
 //*VARIABLES SISTEMA FILTRO
 const filtrosContainer = document.getElementById("filtrosContainer");
 const filtros = document.getElementsByName("filto-producto");
+
 //*CONTADOR CARRITO
 const carritoContador = document.getElementById("carritoContador");
+
+//*CHEQUIAMOS QUE HAYA CARGADO EL CONTENIDO DEL DOM
+document.addEventListener("DOMContentLoaded", () => {
+  fetchData();
+});
+
+//*PETICION CON FETCH
+const fetchData = async () => {
+  try {
+    const res = await fetch("./js/productos.json");
+    const data = await res.json();
+    productos = data;
+    mostrarProductos(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 //*CARRITO
 
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-function mostrarProductos() {
+function mostrarProductos(productos) {
   productos.forEach((producto) => {
     let content = document.createElement("div");
     content.className = "card";
@@ -22,16 +43,14 @@ function mostrarProductos() {
 
     tiendaProductos.append(content);
 
-    //Todo btn comprar
-
     const btnComprar = document.createElement("button");
     btnComprar.className = "card__btn__comprar";
     btnComprar.innerText = "comprar";
 
     content.append(btnComprar);
 
-    //todo: escuchador de eventos
     btnComprar.addEventListener("click", () => {
+      modalContainer.style.display = "none";
       const repetido = carrito.some(
         (repeatProduct) => repeatProduct.id === producto.id
       );
@@ -57,26 +76,25 @@ function mostrarProductos() {
   });
 }
 
+let productoFiltradoDefault = "";
+
 filtrosContainer.addEventListener("click", (e) => {
   if (e.target.matches("li")) {
-    switch (e.target.id) {
-      case "todos":
+    let productoFiltrado = e.target.id;
+
+    if (productoFiltrado !== productoFiltradoDefault) {
+      productoFiltradoDefault = productoFiltrado;
+
+      if (productoFiltrado === "todos") {
         tiendaProductos.innerHTML = "";
-        mostrarProductos();
+        mostrarProductos(productos);
+        carritoCounter();
         saveLocal();
-        break;
-      case "abrigos":
-        filtrarProductos("abrigo");
+      } else {
+        filtrarProductos(productoFiltrado);
+        carritoCounter();
         saveLocal();
-        break;
-      case "camisas":
-        filtrarProductos("camiseta");
-        saveLocal();
-        break;
-      case "pantalones":
-        filtrarProductos("pantalon");
-        saveLocal();
-        break;
+      }
     }
   }
 });
@@ -87,47 +105,7 @@ function filtrarProductos(type) {
   tiendaProductos.innerHTML = "";
   const productType = productos.filter((product) => product.tipo === type);
 
-  productType.forEach((product) => {
-    let content = document.createElement("div");
-    content.className = "card";
-    content.innerHTML = `
-    <img class="card__img" src="${product.Imagen}">
-    <h3 class= "card__titulo">${product.titulo}</h3>
-    <p class= "card__precio">$${product.precio}</p>
-  `;
-
-    tiendaProductos.append(content);
-
-    let btnComprar = document.createElement("button");
-    btnComprar.className = "card__btn__comprar";
-    btnComprar.innerText = "Comprar";
-
-    content.append(btnComprar);
-
-    btnComprar.addEventListener("click", () => {
-      const repetido = carrito.some(
-        (repeatProduct) => repeatProduct.id === product.id
-      );
-
-      if (repetido) {
-        carrito.map((prod) => {
-          if (prod.id === product.id) {
-            prod.cantidad++;
-          }
-        });
-      } else {
-        carrito.push({
-          id: product.id,
-          img: product.Imagen,
-          nombre: product.nombre,
-          precio: product.precio,
-          cantidad: product.cantidad,
-        });
-        saveLocal();
-        carritoCounter();
-      }
-    });
-  });
+  mostrarProductos(productType);
 }
 
 //*Local storage Set Item
@@ -135,4 +113,20 @@ const saveLocal = () => {
   localStorage.setItem("carrito", JSON.stringify(carrito));
 };
 
-mostrarProductos();
+const toastAction = async () => {
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "bottom-right",
+    iconColor: "white",
+    customClass: {
+      popup: "colored-toast",
+    },
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: true,
+  });
+  await Toast.fire({
+    icon: "success",
+    title: "Se ha añadido un producto al carrito",
+  });
+};
